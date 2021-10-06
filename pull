@@ -1,0 +1,9 @@
+#! /bin/bash
+
+## starship 
+mkdir -p ./starship
+cp -rf ~/.config/starship.toml ./starship/
+
+## qtile
+mkdir ./qtile
+cp -rf ~/.config/qtile .
