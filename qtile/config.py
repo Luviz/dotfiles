@@ -33,6 +33,8 @@ from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, Rule
 from libqtile.command import lazy
+from resize import Resize
+# from libqtile.widget import BatteryIcon, BatteryState, Battery
 
 # from libqtile.widget import Spacer
 
@@ -139,6 +141,15 @@ keys = [
         Key([],"i", lazy.group.setlayout("monadwide")),
     ]),
 
+    KeyChord([mod], "y", [
+        Key([],"l", lazy.group.setlayout("max")),
+        Key([],"o", lazy.group.setlayout("monadtall")),
+        Key([], "Up", *Resize.RS_UP()),
+        Key([], "Down", *Resize.RS_DOWN()),
+        Key([], "Left", *Resize.RS_LEFT()),
+        Key([], "Right", *Resize.RS_RIGHT()),
+    ], mode="win size"),
+
     # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
@@ -201,16 +212,16 @@ keys = [
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
     # FLIP LAYOUT FOR BSP
-    Key([mod, "mod1"], "k", lazy.layout.flip_up()),
-    Key([mod, "mod1"], "j", lazy.layout.flip_down()),
-    Key([mod, "mod1"], "l", lazy.layout.flip_right()),
-    Key([mod, "mod1"], "h", lazy.layout.flip_left()),
+    # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
+    # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
+    # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
+    # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+    # Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    # Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    # Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
+    # Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
 
     # Treetab controls
     Key([mod, "control"], "k",
@@ -410,20 +421,25 @@ def init_widgets_list():
             other_screen_border=colors[6],
             disable_drag=True
         ),
+        widget.Sep(linewidth=3),
         widget.TaskList(
             highlight_method="block",
-            icon_size=17,
-            max_title_width=150,
+            icon_size=0,
+            max_title_width=200,
             rounded=False,
-            padding_y=0,
-            margin_y=2,
-
+            padding=1,
+            margin=1,
+            padding_x=5,
+            
+            # border=colors[6],
             border=colors[6],
             background=colors[0],
             foreground=colors[5],
+            
             txt_floating='🗗',
             txt_minimized='>_ ',
-            borderwidth=0,
+
+            borderwidth=1,
         ),
 
         widget.CurrentLayoutIcon(
@@ -434,47 +450,95 @@ def init_widgets_list():
         widget.CurrentLayout(),
 
         # Hardware preformence
-        widget.Net(
-            # Here enter your network name
-            interface=["wlo1"],
-            format='{down} ↓↑ {up}',
-            background=colors[10],
-            foreground=colors[13],
-            padding=0,
+        # widget.Net(
+        #     # Here enter your network name
+        #     # interface=["wlo1"],
+        #     format='{down} ↓↑ {up}',
+        #     background=colors[10],
+        #     foreground=colors[13],
+        #     padding=0,
+        # ),
+        widget.Sep(linewidth=3),
+        widget.NetGraph(
+            # bandwidth_type="down",
+            type="linefill",
+            graph_color="ff0000.3",
+            fill_color="ff0000",
+            border_width=0,
+            line_width=3,
+            samples=25,
+            width=50,
         ),
-        widget.CPU(
-            update_interval=1,
-            background=colors[10],
-            foreground=colors[13],
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        widget.NetGraph(
+            bandwidth_type="up",
+            type="linefill",
+            graph_color="0098ff.3",
+            fill_color="0088ff",
+            border_width=0,
+            line_width=3,
+            samples=25,
+            width=50,
         ),
-        widget.Memory(
-            format='{MemUsed: .0f}/{MemTotal: .0f}G',
-            update_interval=1,
-            measure_mem='G',
-            background=colors[10],
-            foreground=colors[13],
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        # widget.CPU(
+        #     update_interval=1,
+        #     background=colors[10],
+        #     foreground=colors[13],
+        #     mouse_callbacks={
+        #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        # ),
+        widget.Sep(linewidth=3),
+        # widget.Sep(),
+        widget.CPUGraph(
+            type="linefill",
+            graph_color="#00ffee",
+            fill_color="#00ffee",
+            border_width=0,
+            line_width=3,
+            samples=25,
+            width=50,  
         ),
-
+        widget.MemoryGraph(
+            type="linefill",
+            graph_color="#eeff00",
+            fill_color="#eeff00",
+            border_width=0,
+            line_width=3,
+            samples=15,
+            width=50,  
+        ),
+        # widget.Memory(
+        #     format='{MemUsed: .0f}/{MemTotal: .0f}G',
+        #     update_interval=1,
+        #     measure_mem='G',
+        #     background=colors[10],
+        #     foreground=colors[13],
+        #     mouse_callbacks={
+        #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        # ),
+        widget.Sep(linewidth=3),
+        # widget.Sep(),
         widget.Clock(
             format="%Y-%m-%d %H:%M"
         ),
 
         widget.BatteryIcon(
-            background=colors[14],
+            # background=colors[14],
+            
+            theme_path="/home/bardia/.config/qtile/icons/battery_icons_horiz_2"
         ),
         widget.Battery(
-            background=colors[14],
-            format="{percent:2.0%} {hour:d}:{min:02d}"
+            # background=colors[14],
+            update_interval=15,
+            format="{percent:2.0%} {hour:d}:{min:02d} | {watt}W"
         ),
-
+        # widget.CapsNumLockIndicator(),
+        widget.Chord(),
         widget.Systray(
             icon_size=20,
-            padding=4
+            padding=4,
+            # margin_y=1,
         ),
+
     ]
     return widgets_list
 
