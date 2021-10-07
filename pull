@@ -5,5 +5,5 @@ mkdir -p ./starship
 cp -rf ~/.config/starship.toml ./starship/
 
 ## qtile
-mkdir ./qtile
+mkdir -p ./qtile
 cp -rf ~/.config/qtile .
