@@ -10,13 +10,20 @@
 
 ## ALIASES 
 ## list
-alias ls='exa -l --sort type'
-alias lt='exa -lT --sort type'
-alias ll='exa -la --sort type'
-alias la='exa -a --sort type'
+# $listCmd = "ls"
+alias ls='ls --color'
+alias ll='ls -la'
+alias la='ls -a'
+
+if which exa > /dev/null; then
+    alias ls='exa -l --sort type'
+    alias lt='exa -lT --sort type'
+    alias ll='exa -la --sort type'
+    alias la='exa -a --sort type'
+fi
 
 alias grep='grep --color=always'
-alias egrep='grep --color=always -e'
+alias egrep='grep -e'
 
 ## HISTORY
 HISTFILE=~/.histfile
@@ -32,7 +39,6 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 
-# End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/bardia/.zshrc'
 
