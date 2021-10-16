@@ -13,10 +13,10 @@
 alias ls='ls --color'
 alias ll='ls -la'
 alias la='ls -a'
-echo "ls"
+# echo "ls"
 
 if type exa > /dev/null; then
-    echo "exa"
+    # echo "exa"
     alias ls='exa -l --sort type'
     alias lt='exa -lT --sort type'
     alias ll='exa -la --sort type'
