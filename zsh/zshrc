@@ -10,12 +10,11 @@
 
 ## ALIASES 
 ## list
-# $listCmd = "ls"
 alias ls='ls --color'
 alias ll='ls -la'
 alias la='ls -a'
 
-if which exa > /dev/null; then
+if type exa 2> /dev/null; then
     alias ls='exa -l --sort type'
     alias lt='exa -lT --sort type'
     alias ll='exa -la --sort type'
