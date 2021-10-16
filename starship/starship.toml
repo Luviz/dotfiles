@@ -1,4 +1,14 @@
+###############################################################
+#>     __                _      <> Starship config           <#
+#>    / /   __  ___   __(_)___  <> Bardia Jedi               <#
+#>   / /   / / / / | / / /_  /  <> 2021                      <#
+#>  / /___/ /_/ /| |/ / / / /_  <>                           <#
+#> /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  <#
+#>                              <>                           <#
+############################################################### 
 
+## Uses font awesome free | https://fontawesome.com/
+## Uses cascadia code     | https://github.com/microsoft/cascadia-code
 
 # [│](bold cyan)
 format = """
