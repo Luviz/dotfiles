@@ -1,5 +1,7 @@
 # Arch Linux installation 
 
+![arch](../icons/archliunx-icon.svg)
+
 ## install list 
 ### Core pkg
 * base 
