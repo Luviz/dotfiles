@@ -20,7 +20,7 @@ blueman-applet &
 picom --config .config/picom/picom-blur.conf --experimental-backends &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
-feh --randomize --bg-fill /usr/share/wallpapers/garuda-wallpapers/*
+feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
 #starting user applications at boot time
 run volumeicon &
 #run discord &
@@ -36,7 +36,7 @@ run volumeicon &
 #run telegram-desktop &
 
 ## Autolocj screen
-xss-lock -- i3lock -i /usr/share/wallpapers/garuda-wallpapers/Metall-SGS.png &
+xss-lock -- i3lock -i /usr/share/wallpapers/bardia/lockscreen/*.png &
 
 
 ## Keyborad 
