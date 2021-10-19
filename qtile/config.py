@@ -341,7 +341,7 @@ def init_widgets_list():
             padding=10,
             foreground=colors[1],
 
-        ),              #
+        ),
         widget.Image(
             filename=bar_icon_path,
             iconsize=10,
@@ -626,4 +626,4 @@ auto_fullscreen = True
 
 focus_on_window_activation = "focus"  # or smart
 
-wmname = "LG3D"
+wmname = "qTile"
