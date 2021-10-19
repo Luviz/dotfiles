@@ -27,8 +27,13 @@ mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
 
+vscode = "code-insiders" # "code"
+
+wallpapares_path = "/usr/share/wallpapers/bardia"
+bar_icon_path = "/usr/share/icons/bardia/archlinux-icon.svg"
+
 class Commands:
-    lock_screen = "i3lock -i /usr/share/wallpapers/garuda-wallpapers/Metall-SGS.png"
+    lock_screen = f"i3lock -efi {wallpapares_path}/lockscreen/ink_in_water.png"
     d_menu = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
 
 @lazy.function
@@ -228,9 +233,9 @@ keys = [
     # LUNCH APPS
     ## DEV - lunch Code 
     KeyChord([mod], "d", [
-        Key([], 'p', lazy.spawn("code /home/bardia/.config/")),
-        Key([], 'd', lazy.spawn("code /home/bardia/mynotes/")),
-        Key([], 'n', lazy.spawn("code -n")),
+        Key([], 'p', lazy.spawn(f"{vscode} /home/bardia/.config/")),
+        Key([], 'd', lazy.spawn(f"{vscode} /home/bardia/mynotes/")),
+        Key([], 'n', lazy.spawn(f"{vscode} -n")),
     ]),
 
     ## Quick App
@@ -257,7 +262,7 @@ group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", ]
 group_labels = ["WEB", "DEV", "TER", "CHAT",
                 "Meld", "Video", "Vb", "Files", "Mail", ]
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
+group_layouts = ["max", "monadtall", "monadtall", "monadtall",
                  "monadtall", "monadtall", "monadtall", "monadtall", "treetab", ]
 #group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
@@ -382,7 +387,7 @@ def init_widgets_list():
 
         ),              #
         widget.Image(
-            filename="~/.config/qtile/icons/garuda-red.png",
+            filename=bar_icon_path,
             iconsize=10,
             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('jgmenu_run')}
         ),
