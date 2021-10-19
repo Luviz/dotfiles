@@ -150,51 +150,14 @@ keys = [
 
 
     # RESIZE UP, DOWN, LEFT, RIGHT
-    Key([mod, "control"], "l",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        ),
-    Key([mod, "control"], "Right",
-        lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
-        ),
-    Key([mod, "control"], "h",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        ),
-    Key([mod, "control"], "Left",
-        lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
-        ),
-    Key([mod, "control"], "k",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        ),
-    Key([mod, "control"], "Up",
-        lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
-        ),
-    Key([mod, "control"], "j",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        ),
-    Key([mod, "control"], "Down",
-        lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
-        ),
-
+    Key([mod, "control"], "l",*Resize.RS_RIGHT()),
+    Key([mod, "control"], "Right", *Resize.RS_RIGHT()),
+    Key([mod, "control"], "h", *Resize.RS_LEFT()),
+    Key([mod, "control"], "Left", *Resize.RS_LEFT()),
+    Key([mod, "control"], "k", *Resize.RS_UP()),
+    Key([mod, "control"], "Up", *Resize.RS_UP()),
+    Key([mod, "control"], "j", *Resize.RS_DOWN()),
+    Key([mod, "control"], "Down", *Resize.RS_DOWN()),
 
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
@@ -253,18 +216,11 @@ groups = []
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ]
 
-# FOR AZERTY KEYBOARDS
-#group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
-
-group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", ]
-#group_labels = ["", "", "", "", "", "", "", "", "", "",]
-#group_labels = ["", "", "", "", "",]
 group_labels = ["WEB", "DEV", "TER", "CHAT",
                 "Meld", "Video", "Vb", "Files", "Mail", ]
 
 group_layouts = ["max", "monadtall", "monadtall", "monadtall",
                  "monadtall", "monadtall", "monadtall", "monadtall", "treetab", ]
-#group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 for i in range(len(group_names)):
     groups.append(
