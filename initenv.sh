@@ -1,6 +1,6 @@
 #! /bin/bash
 ## Create work folders
 
-workfolders= ('~/repos' '~/mynodes')
+workfolders=('~/repos' '~/mynodes')
 
-mkdir ${workfolders[@]}
+mkdir -p ${workfolders[@]}
