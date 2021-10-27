@@ -17,15 +17,40 @@
 ## QTile
 * sddm
 * wayland
-* alcratiy
+* qtile
+* alacritty
 * xorg-xsetroot
 * python-psutil
 * dmenu
 * pcmanfm
 
+## Qtile Config needed 
+* feh
+* numlockx
+* i3lock
+* xss-lock
+* xorg-xinput
+* imagemagick 
+* xorg-xdpyinfo
+* network-manager-applet
+* pulseaudio
+* pavucontrol
+* pasystray
+* flameshot
+
+## UI tools 
+* lxappearance
+
+
+## TLP
+* tlp 
+* ethtool
+* smartmontools
+
 ## Good Tools to have 
 * starship
 * zsh 
+* fish
 * exa
 * bat
 
