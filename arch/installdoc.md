@@ -37,6 +37,8 @@
 * pavucontrol
 * pasystray
 * flameshot
+* cbatticon
+
 
 ## UI tools 
 * lxappearance
