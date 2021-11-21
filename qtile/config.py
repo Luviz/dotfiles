@@ -386,13 +386,6 @@ def init_widgets_list():
             borderwidth=1,
         ),
 
-        widget.CurrentLayoutIcon(
-            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            padding=1,
-        ),
-
-        widget.CurrentLayout(),
-
         # Hardware preformence
         # widget.Net(
         #     # Here enter your network name
@@ -465,24 +458,21 @@ def init_widgets_list():
             format="%Y-%m-%d %H:%M"
         ),
 
-        widget.BatteryIcon(
-            # background=colors[14],
-            
-            theme_path="/home/bardia/.config/qtile/icons/battery_icons_horiz_2"
-        ),
-        widget.Battery(
-            # background=colors[14],
-            update_interval=15,
-            format="{percent:2.0%} {hour:d}:{min:02d} | {watt}W"
-        ),
         # widget.CapsNumLockIndicator(),
+        widget.Sep(linewidth=3, padding_x=4),
         widget.Chord(),
         widget.Systray(
-            icon_size=20,
+            icon_size=16,
             padding=4,
-            # margin_y=1,
+            margin_y=1,
+            padding_x=3,
         ),
 
+        widget.Sep(linewidth=3),
+        widget.CurrentLayoutIcon(
+            custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+            padding=1,
+        ),
     ]
     return widgets_list
 

@@ -14,17 +14,18 @@ lxsession &
 run nm-applet &
 run pamac-tray &
 numlockx on &
-blueman-applet &
+run blueman-applet &
 #flameshot &
 #picom --config $HOME/.config/picom/picom.conf &
 picom --config .config/picom/picom-blur.conf --experimental-backends &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-dunst &
+# dunst &
 feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
 #starting user applications at boot time
-run volumeicon &
+run pasystray &
+run cbatticon &
+# run tuxedo-control-center &
 #run discord &
-#nitrogen --random --set-zoom-fill &
 #run caffeine -a &
 #run vivaldi-stable &
 #run firefox &
@@ -41,6 +42,6 @@ xss-lock -- i3lock -i /usr/share/wallpapers/bardia/lockscreen/*.png &
 
 ## Keyborad 
 # echo 3 > /sys/class/leds/asus::kbd_backlight/bright4
-xinput set-prop 17 --type=int 'libinput Natural Scrolling Enabled' 1
-xinput set-prop 17 --type=int 'libinput Tapping Button Mapping Enabled' 1, 0
-xinput set-prop 17 --type=int 'libinput Click Method Enabled' 0, 1
+# xinput set-prop 17 --type=int 'libinput Natural Scrolling Enabled' 1
+# xinput set-prop 17 --type=int 'libinput Tapping Button Mapping Enabled' 1, 0
+# xinput set-prop 17 --type=int 'libinput Click Method Enabled' 0, 1
