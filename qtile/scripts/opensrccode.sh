@@ -7,3 +7,4 @@ code="code-insiders"
 selection=$(ls $srcdirpath | dmenu -l 5)
 
 $code $srcdirpath$selection
+# meh
