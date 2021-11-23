@@ -8,6 +8,7 @@
 #>                              <>                           <#
 ############################################################### 
 
+from distutils.spawn import spawn
 import os
 import re
 import socket
@@ -16,6 +17,7 @@ from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, Rule
 from libqtile.command import lazy
+from matplotlib.pyplot import margins
 from resize import Resize
 # from libqtile.widget import BatteryIcon, BatteryState, Battery
 
@@ -214,27 +216,38 @@ keys = [
 groups = []
 
 # FOR QWERTY KEYBOARDS
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ]
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 group_labels = ["WEB", "DEV", "TER", "CHAT",
-                "Meld", "Video", "Vb", "Files", "Mail", ]
+                "5", "6", "7", "8", "Mail", "TUX"]
 
-group_layouts = ["max", "monadtall", "monadtall", "monadtall",
-                 "monadtall", "monadtall", "monadtall", "monadtall", "treetab", ]
+group_layouts = ["max", "monadtall", "monadtall", "treetab",
+                 "monadtall", "monadtall", "monadtall", "monadtall", "treetab", "max"]
 
-for i in range(len(group_names)):
+for group in range(len(group_names)):
     groups.append(
         Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
+            name=group_names[group],
+            layout=group_layouts[group].lower(),
+            label=group_labels[group],
         ))
 
-for i in groups:
+for group in groups:
+    if group.label == "CHAT":
+        group.matches = [Match(wm_class=["microsoft teams - preview", "slack"])]
+
+    if group.label == "TUX":
+        group.matches = [Match(wm_class=["tuxedo-control-center"])]
+    
+    if group.label == "Mail":
+        group.matches = [Match(wm_class=["prospect mail"])]
+        
+        
+
     keys.extend([
 
         # CHANGE WORKSPACES
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod], group.name, lazy.group[group.name].toscreen()),
         Key([mod], "Tab", lazy.screen.next_group()),
         Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
         Key(["mod1"], "Tab", lazy.screen.next_group()),
@@ -243,8 +256,8 @@ for i in groups:
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
         #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key([mod, "shift"], i.name, lazy.window.togroup(
-            i.name), lazy.group[i.name].toscreen()),
+        Key([mod, "shift"], group.name, lazy.window.togroup(
+            group.name), lazy.group[group.name].toscreen()),
     ])
 
 
@@ -269,7 +282,7 @@ layouts = [
     # layout.Stack(**layout_theme),
     # layout.Tile(**layout_theme),
     layout.TreeTab(
-        sections=['FIRST', 'SECOND'],
+        sections=['Chats'],
         bg_color='#141414',
         active_bg='#0000ff',
         inactive_bg='#1e90ff',
