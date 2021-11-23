@@ -3,5 +3,5 @@ if pgrep -x "picom" > /dev/null
 then
 	killall picom
 else
-	picom -b --config ~/.config/picom/picom-blur.conf
+	picom -b --experimental-backends #--config #~/.config/picom/picom-blur.conf
 fi
