@@ -101,13 +101,13 @@ keys = [
     # MULTIMEDIA KEYS
 
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("sudo sudoxbklight -inc 5")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("sudo sudoxbklight -dec 5")),
 
     # INCREASE/DECREASE/MUTE VOLUME
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q set Master 5%-")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q set Master 5%+")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
 
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
@@ -285,7 +285,7 @@ layouts = [
         sections=['Chats'],
         bg_color='#141414',
         active_bg='#0000ff',
-        inactive_bg='#1e90ff',
+        inactive_bg='#666666',#'#aa99ff',
         padding_y=5,
         section_top=10,
         panel_width=280),
