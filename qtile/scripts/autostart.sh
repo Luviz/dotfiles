@@ -17,7 +17,7 @@ numlockx on &
 run blueman-applet &
 #flameshot &
 #picom --config $HOME/.config/picom/picom.conf &
-picom --config .config/picom/picom-blur.conf --experimental-backends &
+picom -b --backend glx --experimental-backends &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # dunst &
 feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
