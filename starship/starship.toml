@@ -13,9 +13,8 @@
 # [│](bold cyan)
 format = """
 [┌─\\[$username\\]@\\[$hostname\\] $directory $cmd_duration](bold cyan) $all\
-[└$git_branch$git_status$character](bold cyan)
+[└$git_branch$git_status$jobs$character](bold cyan)
 """
-
 
 ## disable automatic ln brack
 [line_break]
@@ -43,7 +42,7 @@ disabled = false
 style = "purple"
 truncation_length = 0
 truncate_to_repo = true
-truncation_symbol = "repo: "
+truncation_symbol = " "
 
 # Before all the version info (python, nodejs, php, etc.)
 [git_status]
@@ -55,7 +54,7 @@ deleted = "x"
 
 [git_branch]
 format = "\\[[$branch$symbol]($style)\\] "
-symbol = " "
+symbol = ""
 style = "bold cyan"
 
 
@@ -109,7 +108,7 @@ map_symbol = true
 disabled = true
 
 [aws]
-symbol = " "
+symbol = " "
 
 [conda]
 symbol = " "
@@ -118,7 +117,7 @@ symbol = " "
 symbol = " "
 
 [docker_context]
-symbol = " "
+symbol = " "
 
 [elixir]
 symbol = " "
@@ -127,7 +126,7 @@ symbol = " "
 symbol = " "
 
 # [git_branch]
-# symbol = "" #" "
+# symbol = ""
 
 [golang]
 symbol = " "
@@ -136,7 +135,7 @@ symbol = " "
 symbol = " "
 
 [java]
-symbol = " "
+symbol = " "
 
 [julia]
 symbol = " "
@@ -148,10 +147,10 @@ symbol = " "
 symbol = " "
 
 [nodejs]
-symbol = " "
+symbol = " "
 
 [package]
-symbol = " "
+symbol = " "
 
 [perl]
 symbol = " "
@@ -160,13 +159,13 @@ symbol = " "
 symbol = " "
 
 [python]
-symbol = " "
+symbol = " "
 
 [ruby]
 symbol = " "
 
 [rust]
-symbol = " "
+symbol = " "
 
 [swift]
 symbol = "ﯣ "
