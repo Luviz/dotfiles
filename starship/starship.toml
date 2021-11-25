@@ -12,7 +12,7 @@
 
 # [│](bold cyan)
 format = """
-[┌─\\[$username\\]@\\[$hostname\\] $directory $cmd_duration](bold cyan) $all\
+[┌─\\[$shell\\]─\\[$username\\]@\\[$hostname\\] $directory$cmd_duration](bold cyan) $all\
 [└$git_branch$git_status$jobs$character](bold cyan)
 """
 
@@ -20,6 +20,12 @@ format = """
 [line_break]
 format="aaa"
 disable="true"
+
+[shell]
+disabled = false
+style = "green"
+format = "[$indicator]($style)"
+
 
 ## FIRST LINE/ROW: Info & Status
 # First param ─┌
