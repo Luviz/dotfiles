@@ -382,13 +382,12 @@ def init_widgets_list():
         widget.TaskList(
             highlight_method="block",
             icon_size=0,
-            max_title_width=200,
+            max_title_width=300,
             rounded=False,
             padding=1,
             margin=1,
             padding_x=5,
             
-            # border=colors[6],
             border=colors[6],
             background=colors[0],
             foreground=colors[5],
@@ -468,7 +467,8 @@ def init_widgets_list():
         widget.Sep(linewidth=3),
         # widget.Sep(),
         widget.Clock(
-            format="%Y-%m-%d %H:%M"
+            format="%Y-%m-%d %H:%M",
+            update_interval="5"
         ),
 
         # widget.CapsNumLockIndicator(),
