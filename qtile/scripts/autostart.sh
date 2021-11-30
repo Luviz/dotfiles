@@ -7,7 +7,8 @@ function run {
   fi
 }
 
-wired -r &
+# wired -r &
+systemctl --user start wired_notify.service &
 
 #starting utility applications at boot time
 lxsession &
