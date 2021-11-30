@@ -12,3 +12,7 @@ cp -r ./qtile/* ~/.config/qtile/
 ## alacritty
 mkdir -p ~/.config/alacritty/
 cp ./alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
+## fish 
+mkdir -p ~/.config/fish/
+cp ./fish/config.fish ~/.config/fish/config.fish 
