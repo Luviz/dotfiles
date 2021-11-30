@@ -37,6 +37,8 @@ bar_icon_path = "/usr/share/icons/bardia/archlinux-icon.svg"
 class Commands:
     lock_screen = f"i3lock -efi {wallpapares_path}/lockscreen/ink_in_water.png"
     d_menu = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
+    rofi = "bash /home/bardia/.config/qtile/scripts/rofi.sh"
+    task_manager = "dbtop"
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -69,8 +71,8 @@ keys = [
 
     # SUPER + SHIFT KEYS
     Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
-    Key([mod, "shift"], "d", lazy.spawn(Commands.d_menu)),
-    #    Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
+    Key([mod, "shift"], "d", lazy.spawn(Commands.rofi)),
+    #Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([mod, "shift"],     "q", lazy.window.kill()),
     Key([mod, "shift"],     "r", lazy.restart()),
     Key([mod, "control"],   "r", lazy.restart()),
@@ -94,7 +96,7 @@ keys = [
     Key(["control", "shift"], "Escape", lazy.spawn('lxtask')),
 
     # SCREENSHOTS
-    Key([], "Print", lazy.spawn('flameshot full -p ' + home + '/Pictures')),
+    Key([], "Print", lazy.spawn('flameshot full -p ' + home + '/Pictures/flameshot')),
     Key(["control"], "Print", lazy.spawn('flameshot gui')),
     #    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
 
@@ -195,6 +197,12 @@ keys = [
     # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "space", lazy.window.toggle_floating()), 
 
+    # Key([mod],  "z", lazy.screen.toggle_group()), 
+    Key([mod], "Tab", lazy.screen.toggle_group()),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
+    Key(["mod1"], "Tab", lazy.screen.next_group()),
+    Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+
     # LUNCH APPS
     ## DEV - lunch Code 
     KeyChord([mod], "d", [
@@ -248,10 +256,7 @@ for group in groups:
 
         # CHANGE WORKSPACES
         Key([mod], group.name, lazy.group[group.name].toscreen()),
-        Key([mod], "Tab", lazy.screen.next_group()),
-        Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
-        Key(["mod1"], "Tab", lazy.screen.next_group()),
-        Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+        
 
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
         #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
@@ -417,6 +422,9 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
+            }
         ),
         widget.NetGraph(
             bandwidth_type="up",
@@ -427,6 +435,9 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
+            }
         ),
         # widget.CPU(
         #     update_interval=1,
@@ -444,7 +455,10 @@ def init_widgets_list():
             border_width=0,
             line_width=3,
             samples=25,
-            width=50,  
+            width=50,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
+            }
         ),
         widget.MemoryGraph(
             type="linefill",
@@ -454,6 +468,9 @@ def init_widgets_list():
             line_width=3,
             samples=15,
             width=50,  
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
+            }
         ),
         # widget.Memory(
         #     format='{MemUsed: .0f}/{MemTotal: .0f}G',
@@ -467,8 +484,7 @@ def init_widgets_list():
         widget.Sep(linewidth=3),
         # widget.Sep(),
         widget.Clock(
-            format="%Y-%m-%d %H:%M",
-            update_interval="5"
+            format="%Y-%m-%d %H:%M"
         ),
 
         # widget.CapsNumLockIndicator(),
