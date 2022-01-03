@@ -156,7 +156,7 @@ symbol = " "
 symbol = " "
 
 [package]
-symbol = " "
+symbol = "PKG:"
 
 [perl]
 symbol = " "
