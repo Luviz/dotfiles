@@ -255,7 +255,7 @@ for group in groups:
     keys.extend([
 
         # CHANGE WORKSPACES
-        Key([mod], group.name, lazy.group[group.name].toscreen()),
+        Key([mod], group.name, lazy.group[group.name].toscreen(toggle=True)),
         
 
         # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
