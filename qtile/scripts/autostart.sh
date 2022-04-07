@@ -25,7 +25,7 @@ feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
 #starting user applications at boot time
 run pasystray &
 run cbatticon &
-run teams &
+# run teams &
 run slack
 run tuxedo-control-center &
 run prospect-mail &
