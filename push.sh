@@ -16,3 +16,7 @@ cp ./alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 ## fish 
 mkdir -p ~/.config/fish/
 cp ./fish/config.fish ~/.config/fish/config.fish 
+
+## picom
+mkdir -p ~/.config/picom
+cp ./picom/* ~/.config/picom/
