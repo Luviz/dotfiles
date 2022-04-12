@@ -1,64 +1,67 @@
-# Arch Linux installation 
+# Arch Linux installation
 
 ![arch](../icons/archlinux-icon.svg)
 
-## install list 
+## install list
+
 ### Core pkg
-* base 
-* linux 
-* linux-firmware
-* sudo 
-* vi
-* vim 
-* networkmanager
-* git
-* rust
+
+- base
+- linux
+- linux-firmware
+- sudo
+- vim
+- networkmanager
+- git
+- rust
 
 ## QTile
-* sddm
-* wayland
-* qtile
-* alacritty
-* xorg-xsetroot
-* python-psutil
-* dmenu
-* pcmanfm
 
-## Qtile Config needed 
-* feh
-* numlockx
-* i3lock
-* xss-lock
-* xorg-xinput
-* imagemagick 
-* xorg-xdpyinfo
-* network-manager-applet
-* pulseaudio
-* pavucontrol
-* pasystray
-* flameshot
-* cbatticon
+- sddm
+- wayland
+- qtile
+- alacritty
+- xorg-xsetroot
+- python-psutil
+- rofi
+- pcmanfm
 
+## Qtile Config needed
 
-## UI tools 
-* lxappearance
+- feh
+- numlockx
+- i3lock
+- xss-lock
+- xorg-xinput
+- imagemagick
+- xorg-xdpyinfo
+- network-manager-applet
+- pulseaudio
+- pavucontrol
+- pasystray
+- flameshot
+- cbatticon
 
+## UI tools
+
+- lxappearance
 
 ## TLP
-* tlp 
-* ethtool
-* smartmontools
 
-## Good Tools to have 
-* starship
-* zsh 
-* fish
-* exa
-* bat
+- tlp
+- ethtool
+- smartmontools
 
-## sddm 
+## Good Tools to have
+
+- starship
+- zsh
+- fish
+- exa
+- bat
+
+## sddm
+
 [dark-arch-sddm](https://github.com/simonesestito/dark-arch-sddm)
 
-## Configuration 
-
-
+## Configuration
