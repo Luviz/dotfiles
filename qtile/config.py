@@ -1,12 +1,11 @@
-
-###############################################################
-#>     __                _      <> QTile config              <#
-#>    / /   __  ___   __(_)___  <> Bardia Jedi               <#
-#>   / /   / / / / | / / /_  /  <> 2021                      <#
-#>  / /___/ /_/ /| |/ / / / /_  <>                           <#
-#> /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  <#
-#>                              <>                           <#
-############################################################### 
+#################################################################
+# >     __                _      <> QTile config              < #
+# >    / /   __  ___   __(_)___  <> Bardia Jedi               < #
+# >   / /   / / / / | / / /_  /  <> 2021                      < #
+# >  / /___/ /_/ /| |/ / / / /_  <>                           < #
+# > /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  < #
+# >                              <>                           < #
+#################################################################
 
 from distutils.spawn import spawn
 import os
@@ -19,6 +18,7 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, Ru
 from libqtile.command import lazy
 from matplotlib.pyplot import margins
 from resize import Resize
+
 # from libqtile.widget import BatteryIcon, BatteryState, Battery
 
 # from libqtile.widget import Spacer
@@ -27,18 +27,20 @@ from resize import Resize
 mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
-home = os.path.expanduser('~')
+home = os.path.expanduser("~")
 
-vscode = "code-insiders" # "code"
+vscode = "code-insiders"  # "code"
 
 wallpapares_path = "/usr/share/wallpapers/bardia"
 bar_icon_path = "/usr/share/icons/bardia/archlinux-icon.svg"
+
 
 class Commands:
     lock_screen = f"i3lock -efi {wallpapares_path}/lockscreen/ink_in_water.png"
     d_menu = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
     rofi = "bash /home/bardia/.config/qtile/scripts/rofi.sh"
     task_manager = "dbtop"
+
 
 @lazy.function
 def window_to_prev_group(qtile):
@@ -60,88 +62,85 @@ keys = [
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
-    Key([mod], "v", lazy.spawn('pavucontrol')),
-    Key([mod], "e", lazy.spawn('pcmanfm')),
+    Key([mod], "v", lazy.spawn("pavucontrol")),
+    Key([mod], "e", lazy.spawn("pcmanfm")),
     Key([mod], "o", lazy.spawn(Commands.lock_screen)),
     # Key([mod], "d", lazy.spawn('nwggrid -p -o 0.4')),
-    Key([mod], "Escape", lazy.spawn('xkill')),
-    Key([mod], "Return", lazy.spawn('alacritty')),
-    Key([mod], "KP_Enter", lazy.spawn('alacritty')),
+    Key([mod], "Escape", lazy.spawn("xkill")),
+    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "KP_Enter", lazy.spawn("alacritty")),
     Key([mod], "x", lazy.shutdown()),
-
     # SUPER + SHIFT KEYS
-    Key([mod, "shift"], "Return", lazy.spawn('pcmanfm')),
+    Key([mod, "shift"], "Return", lazy.spawn("pcmanfm")),
     Key([mod, "shift"], "d", lazy.spawn(Commands.rofi)),
-    #Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
-    Key([mod, "shift"],     "q", lazy.window.kill()),
-    Key([mod, "shift"],     "r", lazy.restart()),
-    Key([mod, "control"],   "r", lazy.restart()),
-    Key([mod, "shift"],     "x", lazy.shutdown()),
-
+    # Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
+    Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod, "shift"], "r", lazy.restart()),
+    Key([mod, "control"], "r", lazy.restart()),
+    Key([mod, "shift"], "x", lazy.shutdown()),
     # CONTROL + ALT KEYS
-    Key(["mod1", "control"], "o", lazy.spawn(
-        home + '/.config/qtile/scripts/picom-toggle.sh')),
-    Key(["mod1", "control"], "t", lazy.spawn('xterm')),
+    Key(
+        ["mod1", "control"],
+        "o",
+        lazy.spawn(home + "/.config/qtile/scripts/picom-toggle.sh"),
+    ),
+    Key(["mod1", "control"], "t", lazy.spawn("xterm")),
     # Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
-
     # ALT + ... KEYS
     # Key(["mod1"], "p", lazy.spawn('pamac-manager')),
     # Key(["mod1"], "f", lazy.spawn('firedragon')),
     # Key(["mod1"], "m", lazy.spawn('pcmanfm')),
     # Key(["mod1"], "w", lazy.spawn('garuda-welcome')),
-    Key(["mod1", "control"], "p", lazy.spawn('nwggrid -p -o 0.4')),
-
-
+    Key(["mod1", "control"], "p", lazy.spawn("nwggrid -p -o 0.4")),
     # CONTROL + SHIFT KEYS
-    Key(["control", "shift"], "Escape", lazy.spawn('lxtask')),
-
+    Key(["control", "shift"], "Escape", lazy.spawn("lxtask")),
     # SCREENSHOTS
-    Key([], "Print", lazy.spawn('flameshot full -p ' + home + '/Pictures/flameshot')),
-    Key(["control"], "Print", lazy.spawn('flameshot gui')),
+    Key([], "Print", lazy.spawn("flameshot full -p " + home + "/Pictures/flameshot")),
+    Key(["control"], "Print", lazy.spawn("flameshot gui")),
     #    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
-
     # MULTIMEDIA KEYS
-
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("sudo sudoxbklight -inc 5")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("sudo sudoxbklight -dec 5")),
-
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10 -step 5")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10 -step 5")),
     # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
-
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
-
     #    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
     #    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
     #    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
     #    Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
-
     # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
     Key([mod], "m", lazy.layout.maximize()),
-
-    KeyChord([mod], "p", [
-        Key([],"p", lazy.group.setlayout("max")),
-        # Key([],"l", lazy.group.setlayout("treetab")), ## dose not work - side panel wont show
-        Key([],"o", lazy.group.setlayout("monadtall")),
-        Key([],"i", lazy.group.setlayout("monadwide")),
-    ]),
-
-    KeyChord([mod], "y", [
-        Key([],"l", lazy.group.setlayout("max")),
-        Key([],"o", lazy.group.setlayout("monadtall")),
-        Key([], "Up", *Resize.RS_UP()),
-        Key([], "Down", *Resize.RS_DOWN()),
-        Key([], "Left", *Resize.RS_LEFT()),
-        Key([], "Right", *Resize.RS_RIGHT()),
-    ], mode="win size"),
-
+    KeyChord(
+        [mod],
+        "p",
+        [
+            Key([], "p", lazy.group.setlayout("max")),
+            # Key([],"l", lazy.group.setlayout("treetab")), ## dose not work - side panel wont show
+            Key([], "o", lazy.group.setlayout("monadtall")),
+            Key([], "i", lazy.group.setlayout("monadwide")),
+        ],
+    ),
+    KeyChord(
+        [mod],
+        "y",
+        [
+            Key([], "l", lazy.group.setlayout("max")),
+            Key([], "o", lazy.group.setlayout("monadtall")),
+            Key([], "Up", *Resize.RS_UP()),
+            Key([], "Down", *Resize.RS_DOWN()),
+            Key([], "Left", *Resize.RS_LEFT()),
+            Key([], "Right", *Resize.RS_RIGHT()),
+        ],
+        mode="win size",
+    ),
     # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
@@ -151,10 +150,8 @@ keys = [
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-
-
     # RESIZE UP, DOWN, LEFT, RIGHT
-    Key([mod, "control"], "l",*Resize.RS_RIGHT()),
+    Key([mod, "control"], "l", *Resize.RS_RIGHT()),
     Key([mod, "control"], "Right", *Resize.RS_RIGHT()),
     Key([mod, "control"], "h", *Resize.RS_LEFT()),
     Key([mod, "control"], "Left", *Resize.RS_LEFT()),
@@ -162,63 +159,65 @@ keys = [
     Key([mod, "control"], "Up", *Resize.RS_UP()),
     Key([mod, "control"], "j", *Resize.RS_DOWN()),
     Key([mod, "control"], "Down", *Resize.RS_DOWN()),
-
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
-
     # FLIP LAYOUT FOR BSP
     # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
     # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
     # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
     # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
-
     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
     # Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     # Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     # Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
     # Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
-
     # Treetab controls
-    Key([mod, "control"], "k",
+    Key(
+        [mod, "control"],
+        "k",
         lazy.layout.section_up(),
-        desc='Move up a section in treetab'
-        ),
-    Key([mod, "control"], "j",
+        desc="Move up a section in treetab",
+    ),
+    Key(
+        [mod, "control"],
+        "j",
         lazy.layout.section_down(),
-        desc='Move down a section in treetab'
-        ),
-
+        desc="Move down a section in treetab",
+    ),
     # MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
-
     # TOGGLE FLOATING LAYOUT
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()), 
-
-    # Key([mod],  "z", lazy.screen.toggle_group()), 
+    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+    # Key([mod],  "z", lazy.screen.toggle_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
     Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
     Key(["mod1"], "Tab", lazy.screen.next_group()),
     Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
-
     # LUNCH APPS
-    ## DEV - lunch Code 
-    KeyChord([mod], "d", [
-        Key([], 'p', lazy.spawn(f"{vscode} /home/bardia/.config/")),
-        Key([], 'd', lazy.spawn(f"{vscode} /home/bardia/mynotes/")),
-        Key([], 'n', lazy.spawn(f"{vscode} -n")),
-    ]),
-
+    ## DEV - lunch Code
+    KeyChord(
+        [mod],
+        "d",
+        [
+            Key([], "p", lazy.spawn(f"{vscode} /home/bardia/.config/")),
+            Key([], "d", lazy.spawn(f"{vscode} /home/bardia/mynotes/")),
+            Key([], "n", lazy.spawn(f"{vscode} -n")),
+        ],
+    ),
     ## Quick App
-    KeyChord([mod], "a", [
-        Key([], 'a', lazy.spawn("google-chrome-stable")),
-        Key([], 'd', lazy.spawn("firefox")),
-        Key([], 'n', lazy.spawn("google-chrome-stable --incognito")),
-    ]),
-
-    # KEYS END!   
+    KeyChord(
+        [mod],
+        "a",
+        [
+            Key([], "a", lazy.spawn("google-chrome-stable")),
+            Key([], "d", lazy.spawn("firefox")),
+            Key([], "n", lazy.spawn("google-chrome-stable --incognito")),
+        ],
+    ),
+    # KEYS END!
 ]
 
 groups = []
@@ -226,11 +225,20 @@ groups = []
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-group_labels = ["WEB", "DEV", "TER", "CHAT",
-                "5", "6", "7", "8", "Mail", "TUX"]
+group_labels = ["WEB", "DEV", "TER", "CHAT", "5", "6", "7", "8", "Mail", "TUX"]
 
-group_layouts = ["max", "monadtall", "monadtall", "treetab",
-                 "monadtall", "monadtall", "monadtall", "monadtall", "treetab", "max"]
+group_layouts = [
+    "max",
+    "monadtall",
+    "monadtall",
+    "treetab",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "monadtall",
+    "treetab",
+    "max",
+]
 
 for group in range(len(group_names)):
     groups.append(
@@ -238,7 +246,8 @@ for group in range(len(group_names)):
             name=group_names[group],
             layout=group_layouts[group].lower(),
             label=group_labels[group],
-        ))
+        )
+    )
 
 for group in groups:
     if group.label == "CHAT":
@@ -246,104 +255,107 @@ for group in groups:
 
     if group.label == "TUX":
         group.matches = [Match(wm_class=["tuxedo-control-center"])]
-    
+
     if group.label == "Mail":
         group.matches = [Match(wm_class=["prospect mail"])]
-        
-        
 
-    keys.extend([
-
-        # CHANGE WORKSPACES
-        Key([mod], group.name, lazy.group[group.name].toscreen(toggle=True)),
-        
-
-        # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-        #Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-        # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key([mod, "shift"], group.name, lazy.window.togroup(
-            group.name), lazy.group[group.name].toscreen()),
-    ])
+    keys.extend(
+        [
+            # CHANGE WORKSPACES
+            Key([mod], group.name, lazy.group[group.name].toscreen(toggle=True)),
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
+            Key(
+                [mod, "shift"],
+                group.name,
+                lazy.window.togroup(group.name),
+                lazy.group[group.name].toscreen(),
+            ),
+        ]
+    )
 
 
 def init_layout_theme():
-    return {"margin": 10,
-            "border_width": 2,
-            "border_focus": "#ff00ff",
-            "border_normal": "#f4c2c2"
-            }
+    return {
+        "margin": 10,
+        "border_width": 2,
+        "border_focus": "#ff00ff",
+        "border_normal": "#f4c2c2",
+    }
 
 
 layout_theme = init_layout_theme()
 
 
 layouts = [
-    layout.MonadTall(margin=16, border_width=2,
-                     border_focus="#ff00ff", border_normal="#f4c2c2"),
-    layout.MonadWide(margin=16, border_width=2,
-                     border_focus="#ff00ff", border_normal="#f4c2c2"),
+    layout.MonadTall(
+        margin=16, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"
+    ),
+    layout.MonadWide(
+        margin=16, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"
+    ),
     layout.Floating(**layout_theme),
     layout.Max(**layout_theme),
     # layout.Stack(**layout_theme),
     # layout.Tile(**layout_theme),
     layout.TreeTab(
-        sections=['Chats'],
-        bg_color='#141414',
-        active_bg='#0000ff',
-        inactive_bg='#666666',#'#aa99ff',
+        sections=["Chats"],
+        bg_color="#141414",
+        active_bg="#0000ff",
+        inactive_bg="#666666",  #'#aa99ff',
         padding_y=5,
         section_top=10,
-        panel_width=280),
-    # layout.VerticalTile(**layout_theme),
-    # layout.Zoomy(**layout_theme)
+        panel_width=280,
+    ),
 ]
 
 # COLORS FOR THE BAR
 
 
 def init_colors():
-    return [["#2F343F", "#2F343F"],  # color 0
-            ["#2F343F", "#2F343F"],  # color 1
-            ["#c0c5ce", "#c0c5ce"],  # color 2
-            ["#e75480", "#e75480"],  # color 3
-            ["#f4c2c2", "#f4c2c2"],  # color 4
-            ["#ffffff", "#ffffff"],  # color 5
-            ["#ff0000", "#ff0000"],  # color 6
-            ["#62FF00", "#62FF00"],  # color 7
-            ["#000000", "#000000"],  # color 8
-            ["#c40234", "#c40234"],  # color 9
-            ["#6790eb", "#6790eb"],  # color 10
-            ["#ff00ff", "#ff00ff"],  # 11
-            ["#4c566a", "#4c566a"],  # 12
-            ["#282c34", "#282c34"],  # 13
-            ["#212121", "#212121"],  # 14
-            ["#98c379", "#98c379"],  # 15
-            ["#b48ead", "#b48ead"],  # 16
-            ["#abb2bf", "#abb2bf"],  # color 17
-            ["#81a1c1", "#81a1c1"],  # 18
-            ["#56b6c2", "#56b6c2"],  # 19
-            ["#c678dd", "#c678dd"],  # 20
-            ["#e06c75", "#e06c75"],  # 21
-            ["#fb9f7f", "#fb9f7f"],  # 22
-            ["#ffd47e", "#ffd47e"]]  # 23
+    return [
+        ["#2F343F", "#2F343F"],  # color 0
+        ["#2F343F", "#2F343F"],  # color 1
+        ["#c0c5ce", "#c0c5ce"],  # color 2
+        ["#e75480", "#e75480"],  # color 3
+        ["#f4c2c2", "#f4c2c2"],  # color 4
+        ["#ffffff", "#ffffff"],  # color 5
+        ["#ff0000", "#ff0000"],  # color 6
+        ["#62FF00", "#62FF00"],  # color 7
+        ["#000000", "#000000"],  # color 8
+        ["#c40234", "#c40234"],  # color 9
+        ["#6790eb", "#6790eb"],  # color 10
+        ["#ff00ff", "#ff00ff"],  # 11
+        ["#4c566a", "#4c566a"],  # 12
+        ["#282c34", "#282c34"],  # 13
+        ["#212121", "#212121"],  # 14
+        ["#98c379", "#98c379"],  # 15
+        ["#b48ead", "#b48ead"],  # 16
+        ["#abb2bf", "#abb2bf"],  # color 17
+        ["#81a1c1", "#81a1c1"],  # 18
+        ["#56b6c2", "#56b6c2"],  # 19
+        ["#c678dd", "#c678dd"],  # 20
+        ["#e06c75", "#e06c75"],  # 21
+        ["#fb9f7f", "#fb9f7f"],  # 22
+        ["#ffd47e", "#ffd47e"],
+    ]  # 23
 
 
 colors = init_colors()
 
 
-def base(fg='text', bg='dark'):
+def base(fg="text", bg="dark"):
     # return {'foreground': ["#ffffff", "#ffffff"],'background': ["#000000", "#000000"]}
-    return {'foreground': colors[14], 'background': colors[1]}
+    return {"foreground": colors[14], "background": colors[1]}
 
 
 # WIDGETS FOR THE BAR
 
+
 def init_widgets_defaults():
     return dict(
-        font='Ubuntu, Mono Nerd Font',
-        fontsize=14,
-        padding=4,
-        background=colors[1]
+        font="Ubuntu, Mono Nerd Font", fontsize=14, padding=4, background=colors[1]
     )
 
 
@@ -353,17 +365,15 @@ widget_defaults = init_widgets_defaults()
 def init_widgets_list():
     # prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
-
         widget.Sep(
             linewidth=1,
             padding=10,
             foreground=colors[1],
-
         ),
         widget.Image(
             filename=bar_icon_path,
             iconsize=10,
-            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('jgmenu_run')}
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("jgmenu_run")},
         ),
         widget.GroupBox(
             **base(bg=colors[1]),
@@ -374,14 +384,14 @@ def init_widgets_list():
             highlight_color=colors[1],
             inactive=colors[6],
             rounded=True,
-            highlight_method='line',
-            urgent_alert_method='line',
+            highlight_method="line",
+            urgent_alert_method="line",
             urgent_border=colors[6],
             this_current_screen_border=colors[6],
             this_screen_border=colors[6],
             other_current_screen_border=colors[6],
             other_screen_border=colors[6],
-            disable_drag=True
+            disable_drag=True,
         ),
         widget.Sep(linewidth=3),
         widget.TaskList(
@@ -392,17 +402,13 @@ def init_widgets_list():
             padding=1,
             margin=1,
             padding_x=5,
-            
             border=colors[6],
             background=colors[0],
             foreground=colors[5],
-            
-            txt_floating='🗗',
-            txt_minimized='>_ ',
-
+            txt_floating="🗗",
+            txt_minimized=">_ ",
             borderwidth=1,
         ),
-
         # Hardware preformence
         # widget.Net(
         #     # Here enter your network name
@@ -422,9 +428,7 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
-            }
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
         widget.NetGraph(
             bandwidth_type="up",
@@ -435,17 +439,9 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
-            }
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
-        # widget.CPU(
-        #     update_interval=1,
-        #     background=colors[10],
-        #     foreground=colors[13],
-        #     mouse_callbacks={
-        #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
-        # ),
+
         widget.Sep(linewidth=3),
         # widget.Sep(),
         widget.CPUGraph(
@@ -456,9 +452,7 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
-            }
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
         widget.MemoryGraph(
             type="linefill",
@@ -467,10 +461,8 @@ def init_widgets_list():
             border_width=0,
             line_width=3,
             samples=15,
-            width=50,  
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(Commands.task_manager)
-            }
+            width=50,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
         # widget.Memory(
         #     format='{MemUsed: .0f}/{MemTotal: .0f}G',
@@ -483,10 +475,7 @@ def init_widgets_list():
         # ),
         widget.Sep(linewidth=3),
         # widget.Sep(),
-        widget.Clock(
-            format="%Y-%m-%d %H:%M"
-        ),
-
+        widget.Clock(format="%Y-%m-%d %H:%M"),
         # widget.CapsNumLockIndicator(),
         widget.Sep(linewidth=3, padding_x=4),
         widget.Chord(),
@@ -496,7 +485,6 @@ def init_widgets_list():
             margin_y=1,
             padding_x=3,
         ),
-
         widget.Sep(linewidth=3),
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
@@ -524,8 +512,24 @@ widgets_screen2 = init_widgets_screen2()
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=20, opacity=0.85, background="000000")),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=20, opacity=0.85, background="000000"))]
+    return [
+        Screen(
+            top=bar.Bar(
+                widgets=init_widgets_screen1(),
+                size=20,
+                opacity=0.85,
+                background="000000",
+            )
+        ),
+        Screen(
+            top=bar.Bar(
+                widgets=init_widgets_screen2(),
+                size=20,
+                opacity=0.85,
+                background="000000",
+            )
+        ),
+    ]
 
 
 screens = init_screens()
@@ -533,10 +537,15 @@ screens = init_screens()
 
 # MOUSE CONFIGURATION
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
-         start=lazy.window.get_size())
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
 ]
 
 dgroups_key_binder = None
@@ -545,64 +554,28 @@ dgroups_app_rules = []
 # ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 # BEGIN
 
-#########################################################
-################ assgin apps to groups ##################
-#########################################################
-# @hook.subscribe.client_new
-# def assign_app_group(client):
-#     d = {}
-#     #########################################################
-#     ################ assgin apps to groups ##################
-#     #########################################################
-#     d["1"] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
-#               "navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
-#     d["2"] = [ "Atom", "Subl3", "Geany", "Brackets", "Code-oss", "Code", "TelegramDesktop", "Discord",
-#                "atom", "subl3", "geany", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
-#     d["3"] = ["Inkscape", "Nomacs", "Ristretto", "Nitrogen", "Feh",
-#               "inkscape", "nomacs", "ristretto", "nitrogen", "feh", ]
-#     d["4"] = ["Gimp", "gimp" ]
-#     d["5"] = ["Meld", "meld", "org.gnome.meld" "org.gnome.Meld" ]
-#     d["6"] = ["Vlc","vlc", "Mpv", "mpv" ]
-#     d["7"] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-#               "virtualbox manager", "virtualbox machine", "vmplayer", ]
-#     d["8"] = ["pcmanfm", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-#               "pcmanfm", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-#     d["9"] = ["Evolution", "Geary", "Mail", "Thunderbird",
-#               "evolution", "geary", "mail", "thunderbird" ]
-#     d["0"] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
-#               "spotify", "pragha", "clementine", "deadbeef", "audacious" ]
-#     ##########################################################
-#     wm_class = client.window.get_wm_class()[0]
-#
-#     for i in range(len(d)):
-#         if wm_class in list(d.values())[i]:
-#             group = list(d.keys())[i]
-#             client.togroup(group)
-#             client.group.cmd_toscreen()
-
-# END
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-
 
 main = None
 
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
 
 
 @hook.subscribe.startup
 def start_always():
     # Set the cursor to something sane in X
-    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+    subprocess.Popen(["xsetroot", "-cursor_name", "left_ptr"])
 
 
 @hook.subscribe.client_new
 def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
+    if (
+        window.window.get_wm_transient_for()
+        or window.window.get_wm_type() in floating_types
+    ):
         window.floating = True
 
 
@@ -612,35 +585,37 @@ floating_types = ["notification", "toolbar", "splash", "dialog"]
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    *layout.Floating.default_float_rules,
-    Match(wm_class='confirm'),
-    Match(wm_class='dialog'),
-    Match(wm_class='download'),
-    Match(wm_class='error'),
-    Match(wm_class='file_progress'),
-    Match(wm_class='notification'),
-    Match(wm_class='splash'),
-    Match(wm_class='toolbar'),
-    Match(wm_class='confirmreset'),
-    Match(wm_class='makebranch'),
-    Match(wm_class='maketag'),
-    Match(wm_class='Arandr'),
-    Match(wm_class='feh'),
-    Match(wm_class='Galculator'),
-    Match(title='branchdialog'),
-    Match(title='Open File'),
-    Match(title='pinentry'),
-    Match(wm_class='ssh-askpass'),
-    Match(wm_class='lxpolkit'),
-    Match(wm_class='Lxpolkit'),
-    Match(wm_class='yad'),
-    Match(wm_class='Yad'),
-    Match(wm_class='Cairo-dock'),
-    Match(wm_class='cairo-dock'),
-
-
-],  fullscreen_border_width=0, border_width=0)
+floating_layout = layout.Floating(
+    float_rules=[
+        *layout.Floating.default_float_rules,
+        Match(wm_class="confirm"),
+        Match(wm_class="dialog"),
+        Match(wm_class="download"),
+        Match(wm_class="error"),
+        Match(wm_class="file_progress"),
+        Match(wm_class="notification"),
+        Match(wm_class="splash"),
+        Match(wm_class="toolbar"),
+        Match(wm_class="confirmreset"),
+        Match(wm_class="makebranch"),
+        Match(wm_class="maketag"),
+        Match(wm_class="Arandr"),
+        Match(wm_class="feh"),
+        Match(wm_class="Galculator"),
+        Match(title="branchdialog"),
+        Match(title="Open File"),
+        Match(title="pinentry"),
+        Match(wm_class="ssh-askpass"),
+        Match(wm_class="lxpolkit"),
+        Match(wm_class="Lxpolkit"),
+        Match(wm_class="yad"),
+        Match(wm_class="Yad"),
+        Match(wm_class="Cairo-dock"),
+        Match(wm_class="cairo-dock"),
+    ],
+    fullscreen_border_width=0,
+    border_width=0,
+)
 auto_fullscreen = True
 
 focus_on_window_activation = "focus"  # or smart
