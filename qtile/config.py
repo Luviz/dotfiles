@@ -40,6 +40,10 @@ class Commands:
     brightness = lambda v: f"xbacklight -inc {v} -step 20"
     picom = f"{home}/.config/qtile/scripts/picom-toggle.sh"
     file_manager = "pcmanfm"
+    audio_manager = "pavucontrol"
+    vol_mute = "pamixer --toggle-mute"
+    vol_inc = lambda v: f"pamixer --increase {v}"
+    vol_dec = lambda v: f"pamixer --decrease {v}"
 
 
 @lazy.function
@@ -60,14 +64,14 @@ keys = [
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
-    Key([mod], "v", lazy.spawn("pavucontrol")),
+    Key([mod], "v", lazy.spawn(Commands.audio_manager)),
     Key([mod], "e", lazy.spawn(Commands.file_manager)),
     Key([mod], "o", lazy.spawn(Commands.lock_screen)),
     Key([mod], "Return", lazy.spawn(myTerm)),
     Key([mod], "KP_Enter", lazy.spawn(myTerm)),
     Key([mod], "x", lazy.shutdown()),
     # SUPER + SHIFT KEYS
-    Key([mod, "shift"], "Return", lazy.spawn("pcmanfm")),
+    Key([mod, "shift"], "Return", lazy.spawn(Commands.file_manager)),
     Key([mod, "shift"], "d", lazy.spawn(Commands.rofi)),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
@@ -86,9 +90,9 @@ keys = [
     Key([], "XF86MonBrightnessUp", lazy.spawn(Commands.brightness(10))),
     Key([], "XF86MonBrightnessDown", lazy.spawn(Commands.brightness(-10))),
     # INCREASE/DECREASE/MUTE VOLUME
-    Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer --increase 5")),
+    Key([], "XF86AudioMute", lazy.spawn(Commands.vol_mute)),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(Commands.vol_dec(5))),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(Commands.vol_inc(5))),
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
