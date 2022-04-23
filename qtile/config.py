@@ -1,22 +1,17 @@
-#################################################################
-# >     __                _      <> QTile config              < #
-# >    / /   __  ___   __(_)___  <> Bardia Jedi               < #
-# >   / /   / / / / | / / /_  /  <> 2021                      < #
-# >  / /___/ /_/ /| |/ / / / /_  <>                           < #
-# > /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  < #
-# >                              <>                           < #
-#################################################################
+ ###############################################################
+ #>     __                _      <> QTile config              <#
+ #>    / /   __  ___   __(_)___  <> Bardia Jedi               <#
+ #>   / /   / / / / | / / /_  /  <> 2021                      <#
+ #>  / /___/ /_/ /| |/ / / / /_  <>                           <#
+ #> /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  <#
+ #>                              <>                           <#
+ ###############################################################
 
-from distutils.spawn import spawn
 import os
-import re
-import socket
 import subprocess
-from typing import List  # noqa: F401
 from libqtile import layout, bar, widget, hook, qtile
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, Rule
+from libqtile.config import Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.command import lazy
-from matplotlib.pyplot import margins
 from resize import Resize
 
 # from libqtile.widget import BatteryIcon, BatteryState, Battery
@@ -34,12 +29,17 @@ vscode = "code-insiders"  # "code"
 wallpapares_path = "/usr/share/wallpapers/bardia"
 bar_icon_path = "/usr/share/icons/bardia/archlinux-icon.svg"
 
+myTerm = "alacritty"  # My terminal of choice
+
 
 class Commands:
     lock_screen = f"i3lock -efi {wallpapares_path}/lockscreen/ink_in_water.png"
     d_menu = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
     rofi = "bash /home/bardia/.config/qtile/scripts/rofi.sh"
-    task_manager = "dbtop"
+    task_manager = f"{myTerm} -e btop"
+    brightness = lambda v: f"xbacklight -inc {v} -step 20"
+    picom = f"{home}/.config/qtile/scripts/picom-toggle.sh"
+    file_manager = "pcmanfm"
 
 
 @lazy.function
@@ -56,52 +56,35 @@ def window_to_next_group(qtile):
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
 
 
-myTerm = "alacritty"  # My terminal of choice
-
 keys = [
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "v", lazy.spawn("pavucontrol")),
-    Key([mod], "e", lazy.spawn("pcmanfm")),
+    Key([mod], "e", lazy.spawn(Commands.file_manager)),
     Key([mod], "o", lazy.spawn(Commands.lock_screen)),
-    # Key([mod], "d", lazy.spawn('nwggrid -p -o 0.4')),
-    Key([mod], "Escape", lazy.spawn("xkill")),
-    Key([mod], "Return", lazy.spawn("alacritty")),
-    Key([mod], "KP_Enter", lazy.spawn("alacritty")),
+    Key([mod], "Return", lazy.spawn(myTerm)),
+    Key([mod], "KP_Enter", lazy.spawn(myTerm)),
     Key([mod], "x", lazy.shutdown()),
     # SUPER + SHIFT KEYS
     Key([mod, "shift"], "Return", lazy.spawn("pcmanfm")),
     Key([mod, "shift"], "d", lazy.spawn(Commands.rofi)),
-    # Key([mod, "shift"], "d", lazy.spawn(home + '/.config/qtile/scripts/dmenu.sh')),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.shutdown()),
     # CONTROL + ALT KEYS
-    Key(
-        ["mod1", "control"],
-        "o",
-        lazy.spawn(home + "/.config/qtile/scripts/picom-toggle.sh"),
-    ),
-    Key(["mod1", "control"], "t", lazy.spawn("xterm")),
-    # Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
+    Key(["mod1", "control"], "o", lazy.spawn(Commands.picom)),
+    Key(["mod1", "control"], "t", lazy.spawn(myTerm)),
     # ALT + ... KEYS
-    # Key(["mod1"], "p", lazy.spawn('pamac-manager')),
-    # Key(["mod1"], "f", lazy.spawn('firedragon')),
-    # Key(["mod1"], "m", lazy.spawn('pcmanfm')),
-    # Key(["mod1"], "w", lazy.spawn('garuda-welcome')),
     Key(["mod1", "control"], "p", lazy.spawn("nwggrid -p -o 0.4")),
-    # CONTROL + SHIFT KEYS
-    Key(["control", "shift"], "Escape", lazy.spawn("lxtask")),
     # SCREENSHOTS
     Key([], "Print", lazy.spawn("flameshot full -p " + home + "/Pictures/flameshot")),
     Key(["control"], "Print", lazy.spawn("flameshot gui")),
-    #    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
     # MULTIMEDIA KEYS
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 10 -step 5")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 10 -step 5")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn(Commands.brightness(10))),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(Commands.brightness(-10))),
     # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("pamixer --toggle-mute")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer --decrease 5")),
@@ -161,16 +144,6 @@ keys = [
     Key([mod, "control"], "Down", *Resize.RS_DOWN()),
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
-    # FLIP LAYOUT FOR BSP
-    # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
-    # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
-    # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
-    # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
-    # MOVE WINDOWS UP OR DOWN BSP LAYOUT
-    # Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-    # Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    # Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
-    # Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
     # Treetab controls
     Key(
         [mod, "control"],
@@ -441,7 +414,6 @@ def init_widgets_list():
             width=50,
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
-
         widget.Sep(linewidth=3),
         # widget.Sep(),
         widget.CPUGraph(
