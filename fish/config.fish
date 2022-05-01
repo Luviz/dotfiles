@@ -12,6 +12,9 @@ alias lt="exa -lT"
 abbr -a -g gco git checkout
 abbr -a -g gcob git checkout -b
 
+abbr -a -g gd git pull
+abbr -a -g gu git push
+
 abbr -a -g gst git stash
 abbr -a -g gstp git stash pop
 
