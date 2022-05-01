@@ -97,10 +97,6 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
-    #    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
-    #    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
-    #    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
-    #    Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
     # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
