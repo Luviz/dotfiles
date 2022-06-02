@@ -46,7 +46,7 @@ disabled = false
 # Third param
 [directory]
 style = "purple"
-truncation_length = 0
+truncation_length = 8
 truncate_to_repo = true
 truncation_symbol = " "
 
@@ -104,7 +104,7 @@ disabled = true
 # Prompt: param 2 └─
 [character]
 success_symbol = "[λ](bold cyan)"
-error_symbol = "[×](bold cyan)"
+error_symbol = "[x](bold cyan)"
 
 # SYMBOLS
 [status]
