@@ -592,4 +592,4 @@ auto_fullscreen = True
 
 focus_on_window_activation = "focus"  # or smart
 
-wmname = "qTile"
+wmname = "LG3D"
