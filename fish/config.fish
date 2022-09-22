@@ -23,4 +23,15 @@ abbr -a -g glog git log --oneline
 
 alias code="code-insiders"
 
+## K8S
+
+abbr -a -g k kubectl
+
+abbr -a -g kc kubectl create
+abbr -a -g kd kubectl delete
+abbr -a -g kg kubectl get
+abbr -a -g ki kubectl describe
+
+abbr -a -g kpod kubectl get pod 
+
 starship init fish | source
