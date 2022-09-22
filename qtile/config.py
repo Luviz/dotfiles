@@ -35,7 +35,7 @@ myTerm = "alacritty"  # My terminal of choice
 class Commands:
     lock_screen = f"i3lock -efi {wallpapares_path}/lockscreen/ink_in_water.png"
     d_menu = "dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'"
-    rofi = "bash /home/bardia/.config/qtile/scripts/rofi.sh"
+    rofi = f"bash {home}/.config/qtile/scripts/rofi.sh"
     task_manager = f"{myTerm} -e btop"
     brightness = lambda v: f"xbacklight -inc {v} -step 20"
     picom = f"{home}/.config/qtile/scripts/picom-toggle.sh"
@@ -44,6 +44,7 @@ class Commands:
     vol_mute = "pamixer --toggle-mute"
     vol_inc = lambda v: f"pamixer --increase {v}"
     vol_dec = lambda v: f"pamixer --decrease {v}"
+    toggle_keyboard = f"{home}/.config/qtile/scripts/chlay.sh"
 
 
 @lazy.function
@@ -190,6 +191,8 @@ keys = [
             Key([], "n", lazy.spawn("google-chrome-stable --incognito")),
         ],
     ),
+    ## change Keyboard layout
+    # Key([mod, "alt"], "space", lazy.spawn(Commands.toggle_keyboard))
     # KEYS END!
 ]
 
@@ -204,7 +207,7 @@ group_layouts = [
     "max",
     "monadtall",
     "monadtall",
-    "treetab",
+    "max",
     "monadtall",
     "monadtall",
     "monadtall",
