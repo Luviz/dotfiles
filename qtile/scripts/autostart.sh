@@ -13,7 +13,7 @@ systemctl --user start wired_notify.service &
 #starting utility applications at boot time
 lxsession &
 run nm-applet &
-run pamac-tray &
+# run pamac-tray &
 numlockx on &
 run blueman-applet &
 #flameshot &
@@ -23,7 +23,7 @@ picom -b --backend glx --experimental-backends &
 # dunst &
 feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
 #starting user applications at boot time
-run pasystray &
+# run pasystray &
 run cbatticon &
 #run teams &
 #run slack
