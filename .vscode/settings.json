@@ -2,5 +2,6 @@
     "cSpell.enabled": true,
     "cSpell.enableFiletypes": [
         "shellscript"
-    ]
+    ],
+    "python.formatting.provider": "black"
 }

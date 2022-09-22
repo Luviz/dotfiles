@@ -1,11 +1,11 @@
- ###############################################################
- #>     __                _      <> QTile config              <#
- #>    / /   __  ___   __(_)___  <> Bardia Jedi               <#
- #>   / /   / / / / | / / /_  /  <> 2021                      <#
- #>  / /___/ /_/ /| |/ / / / /_  <>                           <#
- #> /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  <#
- #>                              <>                           <#
- ###############################################################
+###############################################################
+# >     __                _      <> QTile config              <#
+# >    / /   __  ___   __(_)___  <> Bardia Jedi               <#
+# >   / /   / / / / | / / /_  /  <> 2021                      <#
+# >  / /___/ /_/ /| |/ / / / /_  <>                           <#
+# > /_____/\__,_/ |___/_/ /___/  <> https://github.com/luviz  <#
+# >                              <>                           <#
+###############################################################
 
 import os
 import subprocess
@@ -78,6 +78,8 @@ keys = [
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.shutdown()),
+    # SUPER + ALT
+    Key([mod, "mod1"], "space", lazy.spawn(Commands.toggle_keyboard)),
     # CONTROL + ALT KEYS
     Key(["mod1", "control"], "o", lazy.spawn(Commands.picom)),
     Key(["mod1", "control"], "t", lazy.spawn(myTerm)),
@@ -191,8 +193,6 @@ keys = [
             Key([], "n", lazy.spawn("google-chrome-stable --incognito")),
         ],
     ),
-    ## change Keyboard layout
-    # Key([mod, "alt"], "space", lazy.spawn(Commands.toggle_keyboard))
     # KEYS END!
 ]
 
