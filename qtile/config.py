@@ -287,7 +287,22 @@ layouts = [
 ]
 
 # COLORS FOR THE BAR
+core_color_pallet = {
+    "red": "#D62B24",
+    "darkBlue": "#012F4A",
+    "rose": "#A43E66",
+    "blue": "#07467B",
+    "brown": "#783934",
+}
 
+color_pallet = {
+    'bar-bg': core_color_pallet['darkBlue'],
+    'bar-fg': "#ffffff",
+    'active-bg': core_color_pallet['red'],
+    'active-fg': "#ff0000",
+    'white': "#d8d8d8",
+    'test': '#00ff00'
+}
 
 def init_colors():
     return [
@@ -323,7 +338,7 @@ colors = init_colors()
 
 def base(fg="text", bg="dark"):
     # return {'foreground': ["#ffffff", "#ffffff"],'background': ["#000000", "#000000"]}
-    return {"foreground": colors[14], "background": colors[1]}
+    return {"foreground": color_pallet['bar-fg'],"background": color_pallet['bar-bg']}
 
 
 # WIDGETS FOR THE BAR
@@ -331,7 +346,7 @@ def base(fg="text", bg="dark"):
 
 def init_widgets_defaults():
     return dict(
-        font="Ubuntu, Mono Nerd Font", fontsize=14, padding=4, background=colors[1]
+        font="Ubuntu, Mono Nerd Font", fontsize=14, padding=4, background=color_pallet['bar-bg']
     )
 
 
@@ -344,7 +359,7 @@ def init_widgets_list():
         widget.Sep(
             linewidth=1,
             padding=10,
-            foreground=colors[1],
+            foreground=color_pallet['bar-bg'],
         ),
         widget.Image(
             filename=bar_icon_path,
@@ -352,21 +367,21 @@ def init_widgets_list():
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("jgmenu_run")},
         ),
         widget.GroupBox(
-            **base(bg=colors[1]),
+            **base(bg=color_pallet['bar-bg']),
             margin_y=3,
             padding_x=5,
             borderwidth=3,
-            active=colors[5],
-            highlight_color=colors[1],
-            inactive=colors[6],
+            active=color_pallet['white'],
+            highlight_color= color_pallet['bar-bg'],
+            inactive=color_pallet['active-fg'],
             rounded=True,
             highlight_method="line",
             urgent_alert_method="line",
-            urgent_border=colors[6],
-            this_current_screen_border=colors[6],
-            this_screen_border=colors[6],
-            other_current_screen_border=colors[6],
-            other_screen_border=colors[6],
+            urgent_border=color_pallet['active-bg'],
+            this_current_screen_border=color_pallet['active-bg'],
+            this_screen_border=color_pallet['active-bg'],
+            other_current_screen_border=color_pallet['active-bg'],
+            other_screen_border=color_pallet['active-bg'],
             disable_drag=True,
         ),
         widget.Sep(linewidth=3),
@@ -378,9 +393,9 @@ def init_widgets_list():
             padding=1,
             margin=1,
             padding_x=5,
-            border=colors[6],
-            background=colors[0],
-            foreground=colors[5],
+            border=color_pallet["active-bg"],
+            background=color_pallet['bar-bg'],
+            foreground= color_pallet["white"],
             txt_floating="🗗",
             txt_minimized=">_ ",
             borderwidth=1,
@@ -398,7 +413,7 @@ def init_widgets_list():
         widget.NetGraph(
             # bandwidth_type="down",
             type="linefill",
-            graph_color="ff0000.3",
+            graph_color="ff0000",
             fill_color="ff0000",
             border_width=0,
             line_width=3,
@@ -409,7 +424,7 @@ def init_widgets_list():
         widget.NetGraph(
             bandwidth_type="up",
             type="linefill",
-            graph_color="0098ff.3",
+            graph_color="0098ff",
             fill_color="0088ff",
             border_width=0,
             line_width=3,
