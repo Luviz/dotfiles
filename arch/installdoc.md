@@ -62,6 +62,7 @@
 
 ## sddm
 
-[dark-arch-sddm](https://github.com/simonesestito/dark-arch-sddm)
+- [dark-arch-sddm](https://github.com/simonesestito/dark-arch-sddm)
+- [sddm-slice](https://github.com/EricKotato/sddm-slice)
 
 ## Configuration
