@@ -57,7 +57,7 @@
 - starship
 - zsh
 - fish
-- exa
+- eza
 - bat
 
 ## sddm

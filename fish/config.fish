@@ -4,9 +4,9 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-alias ls="exa -l"
-alias la="exa -la"
-alias lt="exa -lT"
+alias ls="eza -l"
+alias la="eza -la"
+alias lt="eza -lT"
 # alias cat="bat"
 
 abbr -a -g gco git checkout

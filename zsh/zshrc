@@ -15,12 +15,12 @@ alias ll='ls -la'
 alias la='ls -a'
 # echo "ls"
 
-if type exa > /dev/null; then
-    # echo "exa"
-    alias ls='exa -l --sort type'
-    alias lt='exa -lT --sort type'
-    alias ll='exa -la --sort type'
-    alias la='exa -a --sort type'
+if type eza > /dev/null; then
+    # echo "eza"
+    alias ls='eza -l --sort type'
+    alias lt='eza -lT --sort type'
+    alias ll='eza -la --sort type'
+    alias la='eza -a --sort type'
 fi
 
 alias grep='grep --color=always'
