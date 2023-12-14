@@ -18,7 +18,7 @@ numlockx on &
 run blueman-applet &
 #flameshot &
 #picom --config $HOME/.config/picom/picom.conf &
-picom -b --backend glx --experimental-backends &
+picom -b --backend glx &
 #/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # dunst &
 feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
@@ -26,7 +26,7 @@ feh --randomize --bg-fill /usr/share/wallpapers/bardia/*
 # run pasystray &
 run cbatticon &
 #run teams &
-#run slack
+run slack
 run tuxedo-control-center &
 #run prospect-mail &
 #run discord &
@@ -41,7 +41,7 @@ run tuxedo-control-center &
 #run telegram-desktop &
 
 ## Autolocj screen
-xss-lock -- i3lock -i /usr/share/wallpapers/bardia/lockscreen/*.png &
+xss-lock -- i3lock -efi /usr/share/wallpapers/bardia/lockscreen/*.png &
 
 
 ## Keyborad 
