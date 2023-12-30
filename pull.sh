@@ -10,7 +10,7 @@ cp -rf ~/.config/qtile .
 
 ## alacritty
 mkdir -p ./alacritty
-cp -rf ~/.config/alacritty/alacritty.yml ./alacritty/alacritty.yml
+cp -rf ~/.config/alacritty/alacritty.toml ./alacritty/alacritty.toml
 
 ## fish
 mkdir -p ./fish
