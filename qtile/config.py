@@ -24,6 +24,15 @@ mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser("~")
 
+## Core color pallet based on ink_in_water
+core_color_pallet = {
+    "red": "#D62B24",
+    "darkBlue": "#012F4A",
+    "rose": "#A43E66",
+    "blue": "#07467B",
+    "brown": "#783934",
+}
+
 vscode = "code-insiders"  # "code"
 
 wallpapares_path = "/usr/share/wallpapers/bardia"
@@ -196,9 +205,6 @@ keys = [
     # KEYS END!
 ]
 
-groups = []
-
-# FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 group_labels = ["WEB", "DEV", "TER", "CHAT", "5", "6", "7", "8", "Mail", "TUX"]
@@ -216,15 +222,12 @@ group_layouts = [
     "max",
 ]
 
-for group in range(len(group_names)):
-    groups.append(
-        Group(
-            name=group_names[group],
-            layout=group_layouts[group].lower(),
-            label=group_labels[group],
-        )
-    )
+groups = [
+    Group(name=n, label=l, layout=ly)
+    for n, l, ly in zip(group_names, group_labels, group_layouts)
+]
 
+## Setup group configs
 for group in groups:
     if group.label == "CHAT":
         group.matches = [Match(wm_class=["microsoft teams - preview", "slack"])]
@@ -252,139 +255,82 @@ for group in groups:
     )
 
 
-def init_layout_theme():
-    return {
-        "margin": 10,
-        "border_width": 2,
-        "border_focus": "#ff00ff",
-        "border_normal": "#f4c2c2",
-    }
+color_layout_theme = {
+    "border_focus": core_color_pallet["red"],
+    "border_normal": core_color_pallet["darkBlue"],
+}
 
-
-layout_theme = init_layout_theme()
+common_layout_theme = {"margin": 10, "border_width": 2, **color_layout_theme}
 
 
 layouts = [
-    layout.MonadTall(
-        margin=16, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"
-    ),
-    layout.MonadWide(
-        margin=16, border_width=2, border_focus="#ff00ff", border_normal="#f4c2c2"
-    ),
-    layout.Floating(**layout_theme),
-    layout.Max(**layout_theme),
-    # layout.Stack(**layout_theme),
-    # layout.Tile(**layout_theme),
+    layout.MonadTall(margin=16, border_width=2, **color_layout_theme),
+    layout.MonadWide(margin=16, border_width=2, **color_layout_theme),
+    layout.Floating(**common_layout_theme),
+    layout.Max(**common_layout_theme),
     layout.TreeTab(
-        sections=["Chats"],
-        bg_color="#141414",
-        active_bg="#0000ff",
-        inactive_bg="#666666",  #'#aa99ff',
+        sections=["Tabs"],
+        bg_color=core_color_pallet["darkBlue"],
+        active_bg=core_color_pallet["red"],
+        inactive_bg=core_color_pallet["blue"],
         padding_y=5,
         section_top=10,
         panel_width=280,
     ),
 ]
 
-# COLORS FOR THE BAR
-core_color_pallet = {
-    "red": "#D62B24",
-    "darkBlue": "#012F4A",
-    "rose": "#A43E66",
-    "blue": "#07467B",
-    "brown": "#783934",
-}
-
 color_pallet = {
-    'bar-bg': core_color_pallet['darkBlue'],
-    'bar-fg': "#ffffff",
-    'active-bg': core_color_pallet['red'],
-    'active-fg': "#ff0000",
-    'white': "#d8d8d8",
-    'test': '#00ff00'
+    "bar-bg": core_color_pallet["darkBlue"],
+    "bar-fg": "#ffffff",
+    "active-bg": core_color_pallet["red"],
+    "active-fg": "#ff0000",
+    "white": "#d8d8d8",
+    "test": "#00ff00",
 }
 
-def init_colors():
-    return [
-        ["#2F343F", "#2F343F"],  # color 0
-        ["#2F343F", "#2F343F"],  # color 1
-        ["#c0c5ce", "#c0c5ce"],  # color 2
-        ["#e75480", "#e75480"],  # color 3
-        ["#f4c2c2", "#f4c2c2"],  # color 4
-        ["#ffffff", "#ffffff"],  # color 5
-        ["#ff0000", "#ff0000"],  # color 6
-        ["#62FF00", "#62FF00"],  # color 7
-        ["#000000", "#000000"],  # color 8
-        ["#c40234", "#c40234"],  # color 9
-        ["#6790eb", "#6790eb"],  # color 10
-        ["#ff00ff", "#ff00ff"],  # 11
-        ["#4c566a", "#4c566a"],  # 12
-        ["#282c34", "#282c34"],  # 13
-        ["#212121", "#212121"],  # 14
-        ["#98c379", "#98c379"],  # 15
-        ["#b48ead", "#b48ead"],  # 16
-        ["#abb2bf", "#abb2bf"],  # color 17
-        ["#81a1c1", "#81a1c1"],  # 18
-        ["#56b6c2", "#56b6c2"],  # 19
-        ["#c678dd", "#c678dd"],  # 20
-        ["#e06c75", "#e06c75"],  # 21
-        ["#fb9f7f", "#fb9f7f"],  # 22
-        ["#ffd47e", "#ffd47e"],
-    ]  # 23
-
-
-colors = init_colors()
-
-
-def base(fg="text", bg="dark"):
-    # return {'foreground': ["#ffffff", "#ffffff"],'background': ["#000000", "#000000"]}
-    return {"foreground": color_pallet['bar-fg'],"background": color_pallet['bar-bg']}
+base = {"foreground": color_pallet["bar-fg"], "background": color_pallet["bar-bg"]}
 
 
 # WIDGETS FOR THE BAR
 
+widget_defaults = dict(
+    font="Ubuntu, Mono Nerd Font",
+    fontsize=14,
+    padding=4,
+    background=color_pallet["bar-bg"],
+)
 
-def init_widgets_defaults():
-    return dict(
-        font="Ubuntu, Mono Nerd Font", fontsize=14, padding=4, background=color_pallet['bar-bg']
-    )
-
-
-widget_defaults = init_widgets_defaults()
+sep = widget.Sep(linewidth=3)
 
 
 def init_widgets_list():
-    # prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
         widget.Sep(
             linewidth=1,
-            padding=10,
-            foreground=color_pallet['bar-bg'],
+            padding=14,
+            foreground=color_pallet["bar-bg"],
         ),
         widget.Image(
             filename=bar_icon_path,
             iconsize=10,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("jgmenu_run")},
         ),
         widget.GroupBox(
-            **base(bg=color_pallet['bar-bg']),
             margin_y=3,
             padding_x=5,
             borderwidth=3,
-            active=color_pallet['white'],
-            highlight_color= color_pallet['bar-bg'],
-            inactive=color_pallet['active-fg'],
-            rounded=True,
+            active=color_pallet["white"],
+            highlight_color=color_pallet["bar-bg"],
+            inactive=color_pallet["active-fg"],
             highlight_method="line",
             urgent_alert_method="line",
-            urgent_border=color_pallet['active-bg'],
-            this_current_screen_border=color_pallet['active-bg'],
-            this_screen_border=color_pallet['active-bg'],
-            other_current_screen_border=color_pallet['active-bg'],
-            other_screen_border=color_pallet['active-bg'],
+            urgent_border=color_pallet["active-bg"],
+            this_current_screen_border=color_pallet["active-bg"],
+            this_screen_border=color_pallet["active-bg"],
+            other_current_screen_border=color_pallet["active-bg"],
+            other_screen_border=color_pallet["active-bg"],
             disable_drag=True,
         ),
-        widget.Sep(linewidth=3),
+        sep,
         widget.TaskList(
             highlight_method="block",
             icon_size=0,
@@ -394,24 +340,17 @@ def init_widgets_list():
             margin=1,
             padding_x=5,
             border=color_pallet["active-bg"],
-            background=color_pallet['bar-bg'],
-            foreground= color_pallet["white"],
+            background=color_pallet["bar-bg"],
+            foreground=color_pallet["white"],
             txt_floating="🗗",
             txt_minimized=">_ ",
             borderwidth=1,
         ),
         # Hardware preformence
-        # widget.Net(
-        #     # Here enter your network name
-        #     # interface=["wlo1"],
-        #     format='{down} ↓↑ {up}',
-        #     background=colors[10],
-        #     foreground=colors[13],
-        #     padding=0,
-        # ),
-        widget.Sep(linewidth=3),
+        sep,
         widget.NetGraph(
             # bandwidth_type="down",
+            **widget_defaults,
             type="linefill",
             graph_color="ff0000",
             fill_color="ff0000",
@@ -432,8 +371,7 @@ def init_widgets_list():
             width=50,
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
-        widget.Sep(linewidth=3),
-        # widget.Sep(),
+        sep,
         widget.CPUGraph(
             type="linefill",
             graph_color="#00ffee",
@@ -454,58 +392,24 @@ def init_widgets_list():
             width=50,
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
         ),
-        # widget.Memory(
-        #     format='{MemUsed: .0f}/{MemTotal: .0f}G',
-        #     update_interval=1,
-        #     measure_mem='G',
-        #     background=colors[10],
-        #     foreground=colors[13],
-        #     mouse_callbacks={
-        #         'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
-        # ),
-        widget.Sep(linewidth=3),
-        # widget.Sep(),
+        sep,
         widget.Clock(format="%Y-%m-%d %H:%M"),
-        # widget.CapsNumLockIndicator(),
         widget.Sep(linewidth=3, padding_x=4),
         widget.Chord(),
-        widget.Systray(
-            icon_size=16,
-            padding=4,
-            margin_y=1,
-            padding_x=3,
-        ),
-        widget.Sep(linewidth=3),
+        widget.Systray(icon_size=16),
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-            padding=1,
+            padding=15,
         ),
     ]
     return widgets_list
-
-
-widgets_list = init_widgets_list()
-
-
-def init_widgets_screen1():
-    widgets_screen1 = init_widgets_list()
-    return widgets_screen1
-
-
-def init_widgets_screen2():
-    widgets_screen2 = init_widgets_list()
-    return widgets_screen2
-
-
-widgets_screen1 = init_widgets_screen1()
-widgets_screen2 = init_widgets_screen2()
 
 
 def init_screens():
     return [
         Screen(
             top=bar.Bar(
-                widgets=init_widgets_screen1(),
+                widgets=init_widgets_list(),
                 size=20,
                 opacity=0.85,
                 background="000000",
@@ -513,14 +417,13 @@ def init_screens():
         ),
         Screen(
             top=bar.Bar(
-                widgets=init_widgets_screen2(),
+                widgets=init_widgets_list(),
                 size=20,
                 opacity=0.85,
                 background="000000",
             )
         ),
     ]
-
 
 screens = init_screens()
 
@@ -540,9 +443,6 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []
-
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-# BEGIN
 
 
 main = None
@@ -606,6 +506,7 @@ floating_layout = layout.Floating(
     fullscreen_border_width=0,
     border_width=0,
 )
+
 auto_fullscreen = True
 
 focus_on_window_activation = "focus"  # or smart
