@@ -256,7 +256,7 @@ for group in groups:
 
 
 color_layout_theme = {
-    "border_focus": core_color_pallet["red"],
+    "border_focus": core_color_pallet["blue"],
     "border_normal": core_color_pallet["darkBlue"],
 }
 
