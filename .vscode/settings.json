@@ -3,5 +3,8 @@
     "cSpell.enableFiletypes": [
         "shellscript"
     ],
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "cSpell.words": [
+        "alacritty"
+    ]
 }
