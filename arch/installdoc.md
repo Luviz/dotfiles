@@ -14,6 +14,7 @@
 - networkmanager
 - git
 - rust
+- stow
 
 ## QTile
 
