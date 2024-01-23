@@ -6,7 +6,7 @@ cp -rf ~/.config/starship.toml ./starship/
 
 ## qtile
 mkdir -p ./qtile
-cp -rf ~/.config/qtile .
+cp -rdf ~/.config/qtile .
 
 ## alacritty
 mkdir -p ./alacritty
@@ -14,7 +14,7 @@ cp -rf ~/.config/alacritty/alacritty.toml ./alacritty/alacritty.toml
 
 ## fish
 mkdir -p ./fish
-cp ~/.config/fish/config.fish ./fish/config.fish
+cp -rdf ~/.config/fish .
 
 ## picom
 mkdir -p ./picom
