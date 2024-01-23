@@ -24,6 +24,5 @@ stow -v -R --adopt --target="$HOME/.config/picom" picom
 
 
 ## qTile
-
 echo qtile...
 stow -v -R --adopt --target="$HOME/.config/qtile" qtile
