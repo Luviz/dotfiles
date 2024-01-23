@@ -5,6 +5,8 @@
     ],
     "python.formatting.provider": "black",
     "cSpell.words": [
-        "alacritty"
+        "alacritty",
+        "picom",
+        "qtile"
     ]
 }
