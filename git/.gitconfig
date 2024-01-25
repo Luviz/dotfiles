@@ -1,0 +1,10 @@
+[user]
+	email = bardiajedi@gmail.com
+	name = Bardia Jedi
+	signingKey = C16EC8C87A33B017
+[init]
+	defaultBranch = main
+[commit]
+	gpgSign = true
+[core]
+	editor = vim

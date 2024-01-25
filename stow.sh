@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## git
+echo git...
+stow -v -R --adopt --target="$HOME/" git
+
 ## ZSH
 echo zsh...
 stow -v -R --adopt --target="$HOME/.config/" zsh
