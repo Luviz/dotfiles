@@ -13,6 +13,7 @@ from libqtile import layout, bar, widget, hook, qtile
 from libqtile.config import Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.command import lazy
 from resize import Resize
+import re
 
 # from libqtile.widget import BatteryIcon, BatteryState, Battery
 
@@ -122,6 +123,7 @@ keys = [
             Key([], "o", lazy.group.setlayout("monadtall")),
             Key([], "i", lazy.group.setlayout("monadwide")),
         ],
+        name="change layout (p, o, i)",
     ),
     KeyChord(
         [mod],
@@ -134,7 +136,8 @@ keys = [
             Key([], "Left", *Resize.RS_LEFT()),
             Key([], "Right", *Resize.RS_RIGHT()),
         ],
-        mode="win size",
+        name="win size (arrow keys)",
+        mode=True,
     ),
     # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
@@ -191,6 +194,7 @@ keys = [
             Key([], "d", lazy.spawn(f"{vscode} /home/bardia/mynotes/")),
             Key([], "n", lazy.spawn(f"{vscode} -n")),
         ],
+        name="code [p: config | d: notes]"
     ),
     ## Quick App
     KeyChord(
@@ -201,6 +205,7 @@ keys = [
             Key([], "d", lazy.spawn("firefox")),
             Key([], "n", lazy.spawn("google-chrome-stable --incognito")),
         ],
+        name="browser [a: chrome | d: ff | n: chrome incognito]"
     ),
     # KEYS END!
 ]
@@ -230,13 +235,15 @@ groups = [
 ## Setup group configs
 for group in groups:
     if group.label == "CHAT":
-        group.matches = [Match(wm_class=["microsoft teams - preview", "slack"])]
+        group.matches = [
+            Match(wm_class=re.compile(r"^(microsoft teams - preview|slack)$"))
+        ]
 
     if group.label == "TUX":
-        group.matches = [Match(wm_class=["tuxedo-control-center"])]
+        group.matches = [Match(wm_class=re.compile(r"^(tuxedo-control-center)$"))]
 
     if group.label == "Mail":
-        group.matches = [Match(wm_class=["prospect mail"])]
+        group.matches = [Match(wm_class=re.compile(r"^(prospect mail)$"))]
 
     keys.extend(
         [
@@ -347,6 +354,7 @@ def init_widgets_list():
             borderwidth=1,
         ),
         # Hardware preformence
+        widget.Chord(),
         sep,
         widget.NetGraph(
             # bandwidth_type="down",
@@ -358,7 +366,7 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
+            mouse_callbacks={"Button1": lambda: qtile.spawn(Commands.task_manager)},
         ),
         widget.NetGraph(
             bandwidth_type="up",
@@ -369,7 +377,7 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
+            mouse_callbacks={"Button1": lambda: qtile.spawn(Commands.task_manager)},
         ),
         sep,
         widget.CPUGraph(
@@ -380,7 +388,7 @@ def init_widgets_list():
             line_width=3,
             samples=25,
             width=50,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
+            mouse_callbacks={"Button1": lambda: qtile.spawn(Commands.task_manager)},
         ),
         widget.MemoryGraph(
             type="linefill",
@@ -390,12 +398,11 @@ def init_widgets_list():
             line_width=3,
             samples=15,
             width=50,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(Commands.task_manager)},
+            mouse_callbacks={"Button1": lambda: qtile.spawn(Commands.task_manager)},
         ),
         sep,
         widget.Clock(format="%Y-%m-%d %H:%M"),
         widget.Sep(linewidth=3, padding_x=4),
-        widget.Chord(),
         widget.Systray(icon_size=16),
         widget.CurrentLayoutIcon(
             custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
@@ -424,6 +431,7 @@ def init_screens():
             )
         ),
     ]
+
 
 screens = init_screens()
 
