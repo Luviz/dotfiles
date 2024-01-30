@@ -159,19 +159,6 @@ keys = [
     Key([mod, "control"], "Down", *Resize.RS_DOWN()),
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
-    # Treetab controls
-    Key(
-        [mod, "control"],
-        "k",
-        lazy.layout.section_up(),
-        desc="Move up a section in treetab",
-    ),
-    Key(
-        [mod, "control"],
-        "j",
-        lazy.layout.section_down(),
-        desc="Move down a section in treetab",
-    ),
     # MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
