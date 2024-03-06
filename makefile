@@ -10,7 +10,7 @@ init:
 	git stage --all
 
 
-STOW: PRE_STOW STOW_GIT STOW_ZSH STOW_STARSHIP STOW_ALACRITTY STOW_FISH STOW_PICOM STOW_QTILE POST_STOW
+STOW: PRE_STOW STOW_GIT STOW_ZSH STOW_STARSHIP STOW_ALACRITTY STOW_FISH STOW_PICOM STOW_QTILE STOW_NVIM POST_STOW
 
 PRE_STOW:
 	@echo Stowing...
@@ -67,9 +67,14 @@ STOW_QTILE:
 	stow -v --adopt --target="$(CONFIG_DIR)/qtile" qtile
 	@echo =====================================
 
+STOW_NVIM:
+	@echo nvim...
+	@mkdir -p $(CONFIG_DIR)/nvim
+	stow -v --adopt --target="$(CONFIG_DIR)/nvim" nvim
+	@echo =====================================
 
 
-RESTOW: RESTOW_GIT RESTOW_ZSH RESTOW_STARSHIP RESTOW_ALACRITTY RESTOW_FISH RESTOW_PICOM RESTOW_QTILE
+RESTOW: RESTOW_GIT RESTOW_ZSH RESTOW_STARSHIP RESTOW_ALACRITTY RESTOW_FISH RESTOW_PICOM RESTOW_QTILE RESTOW_NVIM
 
 RESTOW_GIT: 
 	@echo restowing git...
@@ -109,3 +114,11 @@ RESTOW_QTILE:
 	@echo restowing qtile...
 	stow -v -R --adopt --target="$(CONFIG_DIR)/qtile" qtile
 	@echo =====================================
+
+RESTOW_NVIM:
+	@echo restowing nvim...
+	stow -v -R --adopt --target="$(CONFIG_DIR)/nvim" nvim
+	@echo =====================================
+
+
+
