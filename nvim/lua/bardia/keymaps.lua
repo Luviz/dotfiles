@@ -1,4 +1,5 @@
 local default_opt = { noremap = true, silent = true }
+local term_opts = { silent = true }
 
 local keymap = vim.api.nvim_set_keymap
 
@@ -35,3 +36,9 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", default_opt)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", default_opt)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", default_opt)
 
+-- Terminal --
+-- Better terminal navigation
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
