@@ -5,6 +5,6 @@ require "bardia.cmp"
 
 
 vim.cmd("colorscheme vscode")
-vim.cmd("Neotree")
+-- vim.cmd("Neotree")
 
 
