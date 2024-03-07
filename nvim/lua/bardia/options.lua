@@ -31,7 +31,7 @@ local options = {
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                             -- display lines as one long line, or true to wrap within screen
   linebreak = true,                        -- companion to wrap, don't split words
-  scrolloff = 0,                           
+  scrolloff = 0,
   sidescrolloff = 0,
 }
 
