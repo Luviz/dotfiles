@@ -22,6 +22,7 @@
 - wayland
 - qtile
 - alacritty
+- nvim
 - xorg-xsetroot
 - python-psutil
 - rofi
@@ -60,6 +61,12 @@
 - fish
 - eza
 - bat
+
+## paru
+
+```
+https://github.com/Morganamilo/paru
+```
 
 ## sddm
 
